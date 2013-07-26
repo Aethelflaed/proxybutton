@@ -1,2 +1,2 @@
 content     proxybutton    chrome/content/
-overlay chrome://browser/content/browser.xul chrome://sample/content/sample.xul
+overlay chrome://browser/content/browser.xul chrome://proxybutton/content/sample.xul
