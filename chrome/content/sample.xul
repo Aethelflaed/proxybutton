@@ -1,7 +1,36 @@
 <?xml version="1.0"?>
 <overlay id="sample" 
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<statusbar id="status-bar">
-		<statusbarpanel id="my-panel" label="Hello, World"  />
-	</statusbar>
+	<script type="text/javascript">
+		var proxybutton_prefs = Components.classes["@mozilla.org/preferences-service;1"]
+			.getService(Components.interfaces.nsIPrefService);
+		proxybutton_prefs = proxybutton_prefs.getBranch("network.proxy.");
+		function proxybutton_toggle()
+		{
+			var value = proxybutton_prefs.getIntPref("type");
+			if (value == 0)
+				proxybutton_on();
+			else if (value == 1)
+				proxybutton_off();
+		}
+		function proxybutton_on()
+		{
+			proxybutton_prefs.setIntPref("type", 1);
+			document.getElementById('proxybutton-menu').setAttribute('label', 'on');
+		}
+		function proxybutton_off()
+		{
+			proxybutton_prefs.setIntPref("type", 0);
+			document.getElementById('proxybutton-menu').setAttribute('label', 'off');
+		}
+	</script>
+	<menubar id="main-menubar">
+		<menuitem id="proxybutton-menu"
+			label="off"
+			onclick="proxybutton_toggle()"
+			/>
+	</menubar>
+	<script type="text/javascript">
+		//proxybutton_off();
+	</script>
 </overlay>
